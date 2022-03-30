@@ -61,14 +61,14 @@ def increase_pen_size():
     current_size = tess.width()
     tess.width(current_size + 1)
     
-    if current_size + 1 > 20:
+    if current_size > 20:
         tess.width(20)
 
 def decrease_pen_size():
     current_size = tess.width()
     tess.width(current_size - 1)
     
-    if current_size - 1 < 1:
+    if current_size < 1:
         tess.width(1)
 
 # Change the turtle's color
