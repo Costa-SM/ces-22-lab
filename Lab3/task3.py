@@ -1,25 +1,43 @@
-class Person():
-    def __init__(self, name, age, gender):
-        self.age = age
-        self.gender = gender
-        print(name, "'s age is", age)
-        print(name, "'s gender is", gender)
+class FirstParent():
+    # Base class
+    def __init__(self):
+        print('First parent !')
 
-class Parent(Person):
-    def __init__(self, parent_name, parent_age, parent_gender):
-        super().__init__(parent_name, parent_age, parent_gender)
-        self.parent_name = parent_name
-        
-        print(parent_name, " is a child's parent")
+class SecondParent():
+    # Base class
+    def __init__(self):
+        print('Second parent !')
 
-    def get_name(self):
-        return self.parent_name
+class ThirdParent(SecondParent):
+    # Inherits SecondParent's methods
+    def __init__(self):
+        super().__init__()
+        print('Third parent, after the second parent !')
 
-#class Child(Person, Parent):
-#    def __init__(self, child_name, child_age, child_gender):
-#        super().__init__(child_name, child_age, child_gender)
-#        print(child_name, "'s parent is", )
+class UselessParent(ThirdParent):
+    def __init__(self):
+        # A "ghost" class that serves only as a means to
+        # use super() to call the init functions of both
+        # its parents, which, in this case, are the 
+        # SecondParent and ThirdParent classes.
 
+        # Thus, by calling super() on this class, the 
+        # interpreter will call the init function for
+        # SecondParent and ThirdParent, respectively
 
-Person('Jose', 15, 'M')
-Parent('Abilio', 40, 'M')
+        super().__init__()
+
+class DerivedClass(FirstParent, UselessParent):
+    def __init__(self):
+        # Call super for the first parent passed to the
+        # derived class
+        super().__init__()
+        # Call super searching for an init function in a 
+        # class "above" the UselessParent.
+        super(UselessParent, self).__init__()
+
+# Thus, by using the UselessParent class, we get the 
+# correct output, which is the first, second, and third
+# parent classes' output, when initializing an object from
+# the DerivedClass.
+DerivedClass()
