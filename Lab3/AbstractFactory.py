@@ -1,4 +1,4 @@
-# Model of a bakery using the abstract factory standard.
+# Model of a bakery using the abstract factory design pattern.
 from abc import ABC, abstractmethod
 
 class CakeFactory(ABC):

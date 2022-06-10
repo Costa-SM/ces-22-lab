@@ -1,3 +1,4 @@
+# Model of a bakery using the builder design pattern.
 from abc import ABC, abstractmethod
 
 class Baker():
